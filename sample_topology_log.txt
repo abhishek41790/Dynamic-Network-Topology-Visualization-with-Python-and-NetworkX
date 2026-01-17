@@ -1,0 +1,7 @@
+DISCOVERED: device_201
+DISCOVERED: device_387
+DISCOVERED: device_542
+REMOVED: device_201
+DISCOVERED: device_119
+REMOVED: device_387
+DISCOVERED: device_774
