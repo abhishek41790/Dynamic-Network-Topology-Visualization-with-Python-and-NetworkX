@@ -1,0 +1,75 @@
+"""
+Dynamic Network Topology Visualization using Python & NetworkX
+
+Input  : Randomly generated nodes and dynamic links
+Output : Live network topology visualization using Matplotlib
+"""
+
+import networkx as nx
+import matplotlib.pyplot as plt
+import random
+import time
+
+# -------------------------------
+# INPUT SECTION
+# -------------------------------
+
+# Number of nodes (devices)
+NUM_NODES = 5
+
+# Number of updates (iterations)
+ITERATIONS = 10
+
+# -------------------------------
+# GRAPH INITIALIZATION
+# -------------------------------
+
+G = nx.Graph()
+
+# Add nodes (devices)
+nodes = list(range(1, NUM_NODES + 1))
+G.add_nodes_from(nodes)
+
+# Enable interactive plotting
+plt.ion()
+
+# -------------------------------
+# DYNAMIC TOPOLOGY UPDATE
+# -------------------------------
+
+for i in range(ITERATIONS):
+    plt.clf()  # Clear previous frame
+
+    # Randomly choose two nodes
+    node1 = random.choice(nodes)
+    node2 = random.choice(nodes)
+
+    # Add edge if nodes are different
+    if node1 != node2:
+        G.add_edge(node1, node2)
+
+    # Graph layout
+    pos = nx.spring_layout(G, seed=42)
+
+    # Draw network
+    nx.draw(
+        G,
+        pos,
+        with_labels=True,
+        node_color="skyblue",
+        node_size=2000,
+        edge_color="gray",
+        font_size=12
+    )
+
+    plt.title(f"Dynamic Network Topology (Iteration {i+1})")
+    plt.pause(1)  # Update every second
+
+# Disable interactive mode
+plt.ioff()
+plt.show()
+
+# -------------------------------
+# OUTPUT
+# -------------------------------
+print("Dynamic network visualization completed successfully.")
